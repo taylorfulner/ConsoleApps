@@ -18,12 +18,10 @@ namespace Cafe_Repository
             return wasAdded;
         }
 
-
         public List<MenuItem> GetMenuItems()
         {
             return _menuItem;
         }
-
 
         public MenuItem GetItemByName(string name)
         {
@@ -56,6 +54,18 @@ namespace Cafe_Repository
             }
         }
 
-
+        public bool DeleteMenuItem(string nameToDelete)
+        {
+            MenuItem itemToDelete = GetItemByName(nameToDelete);
+            if (itemToDelete == null)
+            {
+                return false;
+            }
+            else
+            {
+                _menuItem.Remove(itemToDelete);
+                return true;
+            }
+        }
     }
 }
