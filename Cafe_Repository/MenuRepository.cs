@@ -25,9 +25,9 @@ namespace Cafe_Repository
 
         public MenuItem GetItemByName(string name)
         {
-            foreach(MenuItem item in _menuItem)
+            foreach (MenuItem item in _menuItem)
             {
-                if(item.Name.ToLower() == name.ToLower())
+                if (item.Name.ToLower() == name.ToLower())
                 {
                     return item;
                 }
@@ -38,7 +38,7 @@ namespace Cafe_Repository
         public bool UpdateMenuItem(string oldItemInfo, MenuItem newItemInfo)
         {
             MenuItem oldItem = GetItemByName(oldItemInfo);
-            if(oldItem != null)
+            if (oldItem != null)
             {
                 oldItem.Number = newItemInfo.Number;
                 oldItem.Name = newItemInfo.Name;
