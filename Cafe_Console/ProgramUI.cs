@@ -22,6 +22,7 @@ namespace Cafe_Console
             bool keepMenu = true;
             while (keepMenu)
             {
+                Console.Clear();
                 Console.WriteLine($"Enter a number from the menu below:\n" +
                     $"  1. Create a New Menu Item\n" +
                     $"  2. See All Menu Items\n" +
@@ -52,7 +53,6 @@ namespace Cafe_Console
                         Console.ReadLine();
                         Console.Clear();
                         break;
-
                 }
             }
         }
@@ -68,15 +68,50 @@ namespace Cafe_Console
             Console.WriteLine("Item Name?");
             newItem.Name = Console.ReadLine();
 
+            Console.WriteLine("Item Description?");
+            newItem.Description = Console.ReadLine();
+
             Console.WriteLine("Choose the ingredients from the list below");
             StartingIngredientsList();
-            string ing = Console.ReadLine();
+            string ing = Console.ReadLine().ToLower();
+            List<string> result = ing.Split(',').ToList();
+            newItem.Ingredients = result;
+
+            Console.WriteLine("Price?");
+            newItem.Price = Convert.ToDouble(Console.ReadLine());
+
+            bool wasAdded = _repo.AddItemToMenu(newItem);
+            if(wasAdded == true)
+            {
+                Console.WriteLine($"You added {newItem.Name} to the menu");
+                Console.ReadLine();
+            }
+            else
+            {
+                Console.WriteLine("Item could not be added. Please reenter the information.");
+                Console.ReadLine();
+            }
 
         }
 
         public void SeeMenu()
         {
-
+            Console.Clear();
+            List<MenuItem> allItems = _repo.GetMenuItems();
+            foreach (MenuItem item in allItems)
+            {
+                Console.ForegroundColor = (ConsoleColor.Blue);
+                Console.WriteLine($"Item: {item.Number}. {item.Name}");
+                Console.ResetColor();
+                Console.WriteLine($"  Description: {item.Description}\n" +
+                    $"  Ingredients:");
+                foreach(string i in item.Ingredients)
+                {
+                    Console.WriteLine($"      {i}");
+                }
+                Console.WriteLine($"  Price: {item.Price}\n");
+                Console.ReadLine();
+            }
         }
 
         public void UpdateItem()
@@ -92,16 +127,16 @@ namespace Cafe_Console
         private void StartingIngredientsList()
         {
             MenuItem newIngredient = new MenuItem();
-            newIngredient.Ingredients.Add("Buns");
-            newIngredient.Ingredients.Add("Cheese");
-            newIngredient.Ingredients.Add("Beef");
-            newIngredient.Ingredients.Add("Lettuce");
-            newIngredient.Ingredients.Add("Onion");
-            newIngredient.Ingredients.Add("Ketchup");
+            newIngredient.Ingredients.Add("buns");
+            newIngredient.Ingredients.Add("cheese");
+            newIngredient.Ingredients.Add("beef");
+            newIngredient.Ingredients.Add("lettuce");
+            newIngredient.Ingredients.Add("onion");
+            newIngredient.Ingredients.Add("ketchup");
 
             foreach (string i in newIngredient.Ingredients)
             {
-                Console.WriteLine(i);
+                Console.WriteLine($"  {i}");
             }
         }
 
