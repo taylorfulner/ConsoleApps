@@ -7,8 +7,9 @@ using System.Threading.Tasks;
 
 namespace Cafe_Console
 {
-    public class ProgramUI
+    public class ProgramUI //RUN TESTS
     {
+        public interface IEnumerable<out T> : System.Collections.IEnumerable { };
         private MenuRepository _repo = new MenuRepository();
 
         public void Run()
@@ -72,7 +73,10 @@ namespace Cafe_Console
             newItem.Description = Console.ReadLine();
 
             Console.WriteLine("Choose the ingredients from the list below");
-            StartingIngredientsList();
+            foreach (string i in newItem.Ingredients)
+            {
+                Console.WriteLine($"  {i}");
+            }
             string ing = Console.ReadLine().ToLower();
             List<string> result = ing.Split(',').ToList();
             newItem.Ingredients = result;
@@ -92,7 +96,7 @@ namespace Cafe_Console
                 Console.ReadLine();
             }
 
-        }
+        } //BUG: breaks when enter wrong info
 
         public void SeeMenu()
         {
@@ -110,33 +114,68 @@ namespace Cafe_Console
                     Console.WriteLine($"      {i}");
                 }
                 Console.WriteLine($"  Price: {item.Price}\n");
-                Console.ReadLine();
             }
+            Console.ReadLine();
         }
 
         public void UpdateItem()
         {
+            SeeMenu();
 
+            Console.WriteLine("What is the name of the item would you like to update?");
+            string oldItem = Console.ReadLine();
+            MenuItem newItem = new MenuItem();
+
+            Console.WriteLine("Item Number?");
+            newItem.Number = Convert.ToInt32(Console.ReadLine());
+
+            Console.WriteLine("Item Name?");
+            newItem.Name = Console.ReadLine();
+
+            Console.WriteLine("Item Description?");
+            newItem.Description = Console.ReadLine();
+
+            Console.WriteLine("Choose the ingredients from the list below");
+            foreach (string i in newItem.Ingredients)
+            {
+                Console.WriteLine($"  {i}");
+            }
+            string ing = Console.ReadLine().ToLower();
+            List<string> result = ing.Split(',').ToList();
+            newItem.Ingredients = result;
+
+            Console.WriteLine("Price?");
+            newItem.Price = Convert.ToDouble(Console.ReadLine());
+
+            bool wasAdded = _repo.UpdateMenuItem(oldItem, newItem);
+            if (wasAdded == true)
+            {
+                Console.WriteLine($"You added {newItem.Name} to the menu");
+                Console.ReadLine();
+            }
+            else
+            {
+                Console.WriteLine("Item could not be added. Please reenter the information.");
+                Console.ReadLine();
+            }
         }
 
         public void DeleteItem()
         {
+            Console.Clear();
+            SeeMenu();
 
-        }
+            Console.WriteLine("enter the name of the item you want to delete.");
 
-        private void StartingIngredientsList()
-        {
-            MenuItem newIngredient = new MenuItem();
-            newIngredient.Ingredients.Add("buns");
-            newIngredient.Ingredients.Add("cheese");
-            newIngredient.Ingredients.Add("beef");
-            newIngredient.Ingredients.Add("lettuce");
-            newIngredient.Ingredients.Add("onion");
-            newIngredient.Ingredients.Add("ketchup");
+            bool wasDeleted = _repo.DeleteMenuItem(Console.ReadLine());
 
-            foreach (string i in newIngredient.Ingredients)
+            if (wasDeleted)
             {
-                Console.WriteLine($"  {i}");
+                Console.WriteLine("The item has been deleted.");
+            }
+            else
+            {
+                Console.WriteLine("The item could not be deleted.");
             }
         }
 

@@ -11,7 +11,7 @@ namespace Cafe_Repository
         public int Number { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public List<String> Ingredients { get; set; } = new List<string>();
+        public List<String> Ingredients { get; set; } = new List<string>() { "buns", "beef", "cheese", "ketchup", "lettuce", "onion", "ketchup", "potatoes", "salt" };
         public double Price { get; set; }
 
         public MenuItem() { }
