@@ -96,7 +96,7 @@ namespace Cafe_Console
                 Console.ReadLine();
             }
 
-        } //BUG: breaks when enter wrong info
+        } 
 
         public void SeeMenu()
         {
@@ -113,7 +113,7 @@ namespace Cafe_Console
                 {
                     Console.WriteLine($"      {i}");
                 }
-                Console.WriteLine($"  Price: {item.Price}\n");
+                Console.WriteLine($"  Price: ${item.Price}\n");
             }
             Console.ReadLine();
         }
@@ -179,12 +179,17 @@ namespace Cafe_Console
             }
         }
 
-        private void SeedItems() //FINISH
+        private void SeedItems()
         {
-            MenuItem cheeseburger = new MenuItem();
-            MenuItem hamburger = new MenuItem();
-            MenuItem fries = new MenuItem();
-            MenuItem soda = new MenuItem();
+            MenuItem cheeseburger = new MenuItem(1, "cheeseburger", "cheeseburger", new List<string> { "buns", "cheese", "beef"}, 2.50);
+            MenuItem hamburger = new MenuItem(2, "hamburger", "hamburger", new List<string> { "buns", "beef" }, 2);
+            MenuItem fries = new MenuItem(3, "fries", "fries", new List<string> { "potatoes", "salt" }, 2);
+            MenuItem soda = new MenuItem(4, "soda", "soda", new List<string> { "soda" }, 1.50);
+
+            _repo.AddItemToMenu(cheeseburger);
+            _repo.AddItemToMenu(hamburger);
+            _repo.AddItemToMenu(fries);
+            _repo.AddItemToMenu(soda);
         }
 
     }
