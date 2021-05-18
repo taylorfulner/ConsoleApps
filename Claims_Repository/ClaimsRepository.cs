@@ -23,9 +23,9 @@ namespace Claims_Repository
             return _claimInfo;
         }
 
-        public void GetClaimFromQueue()
+        public Queue<Claims> GetClaimFromQueue()
         {
-            _claimInfo.Peek();
+            return _claimInfo;
 
         }
 
@@ -48,9 +48,9 @@ namespace Claims_Repository
             }
         }
 
-        public void DeleteClaimFromQueue()
+        public Queue<Claims> DeleteClaimFromQueue()
         {
-            _claimInfo.Dequeue();
+            return _claimInfo;
         }
     }
 }
