@@ -33,6 +33,5 @@ namespace Claims_Repository
                 }
             }
         }
-
     }
 }
