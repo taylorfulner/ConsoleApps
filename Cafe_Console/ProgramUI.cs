@@ -58,7 +58,7 @@ namespace Cafe_Console
             }
         }
 
-        public void CreateItem()
+        public void CreateItem()//BUG: crashes if any info is not entered in one section
         {
             Console.Clear();
             MenuItem newItem = new MenuItem();

@@ -6,10 +6,7 @@ using System.Threading.Tasks;
 
 namespace Claims_Repository
 {
-    class Program
+    class ClaimsRepository
     {
-        static void Main(string[] args)
-        {
-        }
     }
 }
