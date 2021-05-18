@@ -33,5 +33,16 @@ namespace Claims_Repository
                 }
             }
         }
+
+        public Claims() { }
+        public Claims(int claimID, ClaimType claimType, string description, double claimAmount, DateTime dateOfIncident, DateTime dateOfClaim)
+        {
+            ClaimID = claimID;
+            ClaimType = claimType;
+            Description = description;
+            ClaimAmount = claimAmount;
+            DateOfIncident = dateOfIncident;
+            DateOfClaim = dateOfClaim;
+        }
     }
 }

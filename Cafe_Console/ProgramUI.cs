@@ -9,7 +9,6 @@ namespace Cafe_Console
 {
     public class ProgramUI //RUN TESTS
     {
-        public interface IEnumerable<out T> : System.Collections.IEnumerable { };
         private MenuRepository _repo = new MenuRepository();
 
         public void Run()
