@@ -46,7 +46,6 @@ namespace Cafe_Repository
                 oldItem.Ingredients = newItemInfo.Ingredients;
                 oldItem.Price = newItemInfo.Price;
                 return true;
-
             }
             else
             {

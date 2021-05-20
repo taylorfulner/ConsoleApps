@@ -57,7 +57,7 @@ namespace Cafe_Console
             }
         }
 
-        public void CreateItem()//BUG: crashes if any info is not entered in one section
+        public void CreateItem()
         {
             Console.Clear();
             MenuItem newItem = new MenuItem();
@@ -71,7 +71,7 @@ namespace Cafe_Console
             Console.WriteLine("Item Description?");
             newItem.Description = Console.ReadLine();
 
-            Console.WriteLine("Choose the ingredients from the list below");
+            Console.WriteLine("Choose the ingredients from the list below. Seperate each ingredient with a ','.");
             foreach (string i in newItem.Ingredients)
             {
                 Console.WriteLine($"  {i}");
@@ -94,7 +94,6 @@ namespace Cafe_Console
                 Console.WriteLine("Item could not be added. Please reenter the information.");
                 Console.ReadLine();
             }
-
         } 
 
         public void SeeMenu()
@@ -176,6 +175,7 @@ namespace Cafe_Console
             {
                 Console.WriteLine("The item could not be deleted.");
             }
+            Console.ReadLine();
         }
 
         private void SeedItems()
