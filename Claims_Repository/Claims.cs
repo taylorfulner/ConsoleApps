@@ -23,7 +23,7 @@ namespace Claims_Repository
             {
                 TimeSpan dateSinceIncident = DateOfClaim - DateOfIncident;
                 int daysSinceIncident = Convert.ToInt32(dateSinceIncident.TotalDays);
-                if (daysSinceIncident <= 30)
+                if (daysSinceIncident <= 30 )
                 {
                     return true;
                 }
