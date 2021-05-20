@@ -114,13 +114,13 @@ namespace Claims_Console
                     Console.WriteLine("Claim description?");
                     newInfo.Description = Console.ReadLine();
 
-                    Console.WriteLine("Claim Amount?");
+                    Console.WriteLine("Claim Amount? (do not enter $)");
                     newInfo.ClaimAmount = Convert.ToDouble(Console.ReadLine());
 
-                    Console.WriteLine("Incident Date? Format: YYYY/MM/DD");
+                    Console.WriteLine("Incident Date?");
                     newInfo.DateOfIncident = DateTime.Parse(Console.ReadLine());
 
-                    Console.WriteLine("Claim Date? Format: YYYY/MM/DD");
+                    Console.WriteLine("Claim Date?");
                     newInfo.DateOfClaim = DateTime.Parse(Console.ReadLine());
 
                     _repo.UpdateClaim(claim, newInfo);
@@ -191,10 +191,10 @@ namespace Claims_Console
             Console.WriteLine("Claim Amount?");
             newClaim.ClaimAmount = Convert.ToDouble(Console.ReadLine());
 
-            Console.WriteLine("Incident Date? Format: YYYY/MM/DD");
+            Console.WriteLine("Incident Date?");
             newClaim.DateOfIncident = DateTime.Parse(Console.ReadLine());
 
-            Console.WriteLine("Claim Date? Format: YYYY/MM/DD");
+            Console.WriteLine("Claim Date?");
             newClaim.DateOfClaim = DateTime.Parse(Console.ReadLine());
 
             Console.WriteLine($"Valid claim? {newClaim.IsValid}\n");
