@@ -26,7 +26,6 @@ namespace Claims_Repository
         public Queue<Claims> GetClaimFromQueue()
         {
             return _claimInfo;
-
         }
 
         public bool UpdateClaim(Claims oldInfo, Claims newInfo)

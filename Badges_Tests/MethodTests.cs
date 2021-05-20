@@ -73,8 +73,6 @@ namespace Badges_Tests
         [TestMethod]
         public void DeleteDoor_ReturnBoolean()
         {
-            BadgesRepository repo = new BadgesRepository();
-
             _repo.DeleteDoor(1, "A1");
             bool wasDoorAdded = _repo.DeleteDoor(1, "A1");
 
