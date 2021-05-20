@@ -8,38 +8,40 @@ namespace Badges_Repository
 {
     public class BadgesRepository
     {
-        public Dictionary<int, List<string>> badgeDictionary = new Dictionary<int, List<string>>();
+        public Dictionary<int, List<string>> _badgeDictionary = new Dictionary<int, List<string>>();
+        public List<string> _doorNames = new List<string> { "A1", "A2", "A3", "A4", "A5", "A6", "B1", "B2", "B3", "B4", "B5", "C1", "C2" };
 
         public void SeedList()
         {
-            badgeDictionary.Add(123, new List<string> { "A2", "A4" });
+            _badgeDictionary.Add(123, new List<string> { "A2", "A4" });
+            _badgeDictionary.Add(124, new List<string> { "B2", "C4" });
         }
-        
+
         public bool CreateNewBadge(int newBadgeID, List<string> door)
         {
-            int startingCount = badgeDictionary.Count;
-            badgeDictionary.Add(newBadgeID, door);
-            bool wasAdded = (badgeDictionary.Count > startingCount) ? true : false;
+            int startingCount = _badgeDictionary.Count;
+            _badgeDictionary.Add(newBadgeID, door);
+            bool wasAdded = (_badgeDictionary.Count > startingCount) ? true : false;
             return wasAdded;
         }
 
-        public Dictionary<int, List<string>> SeeAllBadges()
+        public Badges SeeBadgeByID(int id)
         {
-            return badgeDictionary;
-        }
-
-        public Badges GetBadgeAccess(int id) //FIX TO dictionary type?
-        {
-            foreach (KeyValuePair<int, List<string>> badge in badgeDictionary)
+            foreach (KeyValuePair<int, List<string>> badge in _badgeDictionary)
             {
                 Console.WriteLine($"Key = {badge.Key}, Value = {badge.Value}");
             }
             return null;
         }
 
+        public Dictionary<int, List<string>> GetBadgeAccess() //FIX TO dictionary type?
+        {
+            return _badgeDictionary;
+        }
+
         public bool UpdateBadgeInfo(int id, Badges newBadgeInfo)
         {
-            Badges oldBadgeInfo = GetBadgeAccess(id);
+            Badges oldBadgeInfo = SeeBadgeByID(id);
             if (oldBadgeInfo != null)
             {
                 oldBadgeInfo.BadgeID = newBadgeInfo.BadgeID;
@@ -49,6 +51,20 @@ namespace Badges_Repository
             else
             {
                 return false;
+            }
+        }
+
+        public bool DeleteBadge(int idToDelete)
+        {
+            Badges id = SeeBadgeByID(idToDelete);
+            if (id == null)
+            {
+                return false;
+            }
+            else
+            {
+                _badgeDictionary.Remove(idToDelete);
+                return true;
             }
         }
     }

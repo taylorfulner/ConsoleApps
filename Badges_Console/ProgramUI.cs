@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Badges_Repository;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,9 +9,11 @@ namespace Badges_Console
 {
     public class ProgramUI
     {
+        private BadgesRepository _repo = new BadgesRepository();
+
         public void Run()
         {
-            SeedList();
+            _repo.SeedList();
             Menu();
         }
 
@@ -41,14 +44,42 @@ namespace Badges_Console
                         break;
                     default:
                         break;
-
                 }
             }
         }
 
         public void AddBadge()
         {
+            Console.Clear();
+            Badges newBadge = new Badges();
 
+            Console.WriteLine("What is the number on the badge?");
+            newBadge.BadgeID = Convert.ToInt32(Console.ReadLine());
+
+            Console.WriteLine("List a door the badge needs access to:");
+            string ans = Console.ReadLine().ToLower();
+            List<string> result = ans.Split(' ').ToList();
+            newBadge.DoorName = result;
+
+            bool isYes = true;
+            while (isYes)
+            {
+                Console.WriteLine("any other doors to add(y/n)?");
+                string answer = Console.ReadLine();
+                if (answer == "y")
+                {
+                    Console.WriteLine("list another door:");
+                    string yes = Console.ReadLine().ToLower();
+                    List<string> resultAgain = yes.Split(' ').ToList();
+                    newBadge.DoorName = resultAgain;
+                }
+                else
+                {
+                    isYes = false;
+                }
+            }
+            _repo.CreateNewBadge(newBadge.BadgeID, newBadge.DoorName);
+            Menu();
         }
 
         public void EditBadge()
@@ -58,12 +89,17 @@ namespace Badges_Console
 
         public void ListAllBadges()
         {
-
-        }
-
-        public void SeedList()
-        {
-
+            Console.Clear();
+            Dictionary<int, List<string>> allBadges = _repo.GetBadgeAccess();
+            foreach (KeyValuePair<int, List<string>> badge in allBadges)
+            {
+                Console.WriteLine($"Key = {badge.Key}");
+                foreach (string door in badge.Value)
+                {
+                    Console.Write($" {door}\n");
+                }
+            }
+            Console.ReadLine();
         }
     }
 }
