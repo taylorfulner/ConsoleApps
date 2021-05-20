@@ -6,10 +6,8 @@ using System.Threading.Tasks;
 
 namespace Badges_Repository
 {
-    class Program
+    public class BadgesRepository
     {
-        static void Main(string[] args)
-        {
-        }
+        
     }
 }
