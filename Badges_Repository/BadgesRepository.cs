@@ -14,7 +14,7 @@ namespace Badges_Repository
         public void SeedList()
         {
             _badgeDictionary.Add(123, new List<string> { "A2", "A4" });
-            _badgeDictionary.Add(124, new List<string> { "B2", "C4" });
+            _badgeDictionary.Add(124, new List<string> { "B2", "C2" });
         }
 
         public bool CreateNewBadge(int newBadgeID, List<string> door)
@@ -25,27 +25,29 @@ namespace Badges_Repository
             return wasAdded;
         }
 
-        public Badges SeeBadgeByID(int id)
-        {
-            foreach (KeyValuePair<int, List<string>> badge in _badgeDictionary)
-            {
-                Console.WriteLine($"Key = {badge.Key}, Value = {badge.Value}");
-            }
-            return null;
-        }
-
-        public Dictionary<int, List<string>> GetBadgeAccess() //FIX TO dictionary type?
+        public Dictionary<int, List<string>> GetBadgeAccess()
         {
             return _badgeDictionary;
         }
 
-        public bool UpdateBadgeInfo(int id, Badges newBadgeInfo)
+
+        public Badges SeeBadgeByID(int id)
         {
-            Badges oldBadgeInfo = SeeBadgeByID(id);
-            if (oldBadgeInfo != null)
+            if (_badgeDictionary.ContainsKey(id))
             {
-                oldBadgeInfo.BadgeID = newBadgeInfo.BadgeID;
-                oldBadgeInfo.DoorName = newBadgeInfo.DoorName;
+                Badges newBadge = new Badges(id, _badgeDictionary[id]);
+                return newBadge;
+            }
+            return null;
+        }
+
+
+        public bool AddDoor(int id, string newBadgeDoor)
+        {
+            Badges oldDoor = SeeBadgeByID(id);
+            if (oldDoor != null)
+            {
+                _badgeDictionary[id].Add(newBadgeDoor);
                 return true;
             }
             else
@@ -54,17 +56,17 @@ namespace Badges_Repository
             }
         }
 
-        public bool DeleteBadge(int idToDelete)
+        public bool DeleteDoor(int id, string newBadgeDoor)
         {
-            Badges id = SeeBadgeByID(idToDelete);
-            if (id == null)
+            Badges oldDoor = SeeBadgeByID(id);
+            if (oldDoor != null)
             {
-                return false;
+                _badgeDictionary[id].Remove(newBadgeDoor);
+                return true;
             }
             else
             {
-                _badgeDictionary.Remove(idToDelete);
-                return true;
+                return false;
             }
         }
     }
