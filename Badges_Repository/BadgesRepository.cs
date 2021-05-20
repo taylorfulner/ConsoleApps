@@ -15,6 +15,7 @@ namespace Badges_Repository
         {
             _badgeDictionary.Add(123, new List<string> { "A2", "A4" });
             _badgeDictionary.Add(124, new List<string> { "B2", "C2" });
+            _badgeDictionary.Add(125, new List<string> { "B4", "C2", "A2" });
         }
 
         public bool CreateNewBadge(int newBadgeID, List<string> door)
